@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Facebook ReactJS Tutorial</title>
+    <script src="https://fb.me/react-0.13.2.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.2.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+
+    <script>
+      var App = {
+        data: [
+          {author: "Pete Hunt", text: "This is one comment"},
+          {author: "Jordan Walke", text: "This is *another* comment"}
+        ]
+      };
+    </script>
+    <script type="text/jsx" src="js/Comment.js"></script>
+    <script type="text/jsx" src="js/CommentList.js"></script>
+    <script type="text/jsx" src="js/CommentForm.js"></script>
+    <script type="text/jsx" src="js/CommentBox.js"></script>
+  </head>
+  <body>
+    <div id="content"></div>
+  </body>
+</html>
