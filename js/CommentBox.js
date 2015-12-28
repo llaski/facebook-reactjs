@@ -16,7 +16,7 @@ var CommentBox = React.createClass({
 			<div className="commentBox">
 				<h1>Comments</h1>
 				<CommentList data={this.state.data} />
-				<CommentForm />
+				<CommentForm onCommentSubmit={this.handleCommentSubmit} />
 			</div>
 		);
 	},
@@ -27,6 +27,31 @@ var CommentBox = React.createClass({
 			url: this.props.url,
 			dataType: 'json'
 		}).done(function(data)
+		{
+			this.setState({data: data});
+		}.bind(this)).fail(function(jqXHR, textStatus, errorThrown)
+		{
+			console.error(this.props.url, textStatus, errorThrown.toString());
+		}.bind(this));
+	},
+
+	handleCommentSubmit: function handleCommentSubmit(comment)
+	{
+		var comments = this.state.data;
+		var newComments = comments.concat([comment]);
+		this.setState({ data: newComments });
+
+		//@TODO
+		//Still need to pause polling for new data while this happening
+		//need to remove comment if it fails to be added
+		//if successful, need to update comment with id from server for editing
+
+		$.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      type: 'POST',
+      data: comment,
+    }).done(function(data)
 		{
 			this.setState({data: data});
 		}.bind(this)).fail(function(jqXHR, textStatus, errorThrown)
